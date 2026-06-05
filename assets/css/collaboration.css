@@ -1,0 +1,568 @@
+.collab-accent {
+  color: var(--rs-red-300);
+  text-shadow: 0 0 28px rgba(255, 23, 52, 0.28);
+}
+
+.collab-accent-green {
+  color: var(--rs-red-300);
+  text-shadow: 0 0 28px rgba(255, 23, 52, 0.22);
+}
+
+.collab-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--rs-white);
+  text-decoration: none;
+}
+
+.collab-brand-logos {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.45rem;
+}
+
+.collab-logo {
+  display: block;
+  object-fit: contain;
+  border-radius: 0.65rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.12rem;
+  transition: all 0.2s ease;
+}
+
+.collab-logo[src$="rockstar-logo.png"] {
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0.15rem;
+}
+
+.collab-logo[src$="smk-logo.png"] {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.12rem;
+}
+
+.collab-logo[src$="osis-pmk-logo.png"] {
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0.12rem;
+}
+
+.collab-x {
+  color: var(--rs-dim);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.collab-brand-copy {
+  display: grid;
+  line-height: 1;
+  transform: translateY(1px);
+}
+
+.collab-brand-copy strong {
+  color: var(--rs-white);
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.collab-brand-copy span {
+  color: var(--rs-dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.collab-nav-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.35rem;
+  padding: 0.55rem 0.78rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  color: var(--rs-white);
+  background: rgba(255,255,255,0.045);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.collab-nav-chip:hover {
+  transform: translateY(-2px);
+  color: var(--rs-white);
+  border-color: rgba(255,23,52,0.34);
+  box-shadow: 0 0 24px rgba(224,0,22,0.14);
+}
+
+.collab-nav-chip i {
+  color: var(--rs-red-300);
+}
+
+.collab-banner-section {
+  position: relative;
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  overflow: hidden;
+  border-block: 1px solid rgba(255,255,255,0.07);
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(0,0,0,0.18));
+}
+
+.collab-banner-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 4.25rem 4.25rem;
+  mask-image: linear-gradient(90deg, transparent, black 16%, black 84%, transparent);
+}
+
+.collab-banner-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.35rem, 3.6vw, 2.5rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.1);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.085), rgba(255,255,255,0.03)),
+    rgba(8,8,10,0.74);
+  box-shadow: var(--shadow-card);
+}
+
+.collab-banner-card::after {
+  content: none;
+  display: none;
+}
+
+.collab-logos-showcase {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+  margin-bottom: 1.35rem;
+}
+
+.collab-logo-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 4.25rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.28);
+}
+
+.collab-logo-card img {
+  width: 2.7rem;
+  height: 2.7rem;
+  object-fit: contain;
+  border-radius: 0.7rem;
+}
+
+.collab-logo-card img[src$="rockstar-logo.png"] {
+  width: 3rem;
+  height: 3rem;
+}
+
+.collab-logo-card img[src$="smk-logo.png"] {
+  width: 2rem;
+  height: 2rem;
+}
+
+.collab-logo-card img[src$="osis-pmk-logo.png"] {
+  width: 2.45rem;
+  height: 2.45rem;
+}
+
+.collab-logo-card span {
+  display: block;
+  color: var(--rs-dim);
+  font: 0.62rem var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.collab-logo-card strong {
+  display: block;
+  color: var(--rs-white);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.collab-separator {
+  color: var(--rs-red-300);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.collab-story-card {
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.035);
+}
+
+.collab-story-card p {
+  margin: 0;
+  color: var(--rs-muted);
+}
+
+.collab-story-card strong {
+  color: var(--rs-white);
+}
+
+.collab-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.collab-stat-card {
+  min-height: 9rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-content: start;
+  column-gap: 0.08rem;
+  row-gap: 0.5rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.035);
+  overflow: hidden;
+  position: relative;
+}
+
+.collab-stat-card strong,
+.collab-stat-card > span,
+.collab-stat-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.collab-stat-card strong {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--rs-white);
+  font: 2.3rem/0.9 var(--font-display);
+  align-self: end;
+  justify-self: start;
+  width: max-content;
+}
+
+.collab-stat-card > span {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--rs-red-300);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  align-self: end;
+  justify-self: start;
+  width: max-content;
+  margin-left: 0.08rem;
+  transform: translateY(-0.12rem);
+}
+
+.collab-stat-card p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  color: var(--rs-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.student-benefit-section {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.student-benefit-card {
+  position: relative;
+  min-height: 100%;
+  padding: 1.2rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--rs-panel);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.student-benefit-card:hover {
+  transform: translateY(-0.45rem);
+  border-color: rgba(255,23,52,0.28);
+  box-shadow: var(--shadow-lift);
+}
+
+.student-benefit-card i {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--rs-red-300);
+  background: rgba(255,23,52,0.12);
+  box-shadow: 0 0 24px rgba(224,0,22,0.16);
+  font-size: 1.35rem;
+}
+
+.student-benefit-card h3 {
+  margin: 1rem 0 0.25rem;
+  color: var(--rs-white);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.student-benefit-card p {
+  margin: 0;
+  color: var(--rs-muted);
+}
+
+.student-promo-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.28);
+}
+
+.student-promo-panel::before {
+  content: none;
+  display: none;
+}
+
+.premium-badge,
+.pmk-edition-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: max-content;
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 0.32rem 0.72rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.045);
+  color: var(--rs-soft);
+  font: 0.66rem var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pmk-edition-badge {
+  color: var(--rs-white);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.game-card .pmk-edition-badge,
+.modal-visual .pmk-edition-badge {
+  margin-top: 0.65rem;
+}
+
+.collab-floating-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.2rem;
+}
+
+.collab-floating-highlights span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 999px;
+  color: var(--rs-soft);
+  background: rgba(255,255,255,0.045);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.collab-floating-highlights i {
+  color: var(--rs-red-300);
+}
+
+.order-student-benefit {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--radius-lg);
+  background: rgba(0,0,0,0.28);
+}
+
+.student-toggle-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.student-toggle-copy h3 {
+  margin: 0;
+  color: var(--rs-white);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.55rem;
+  line-height: 0.95;
+}
+
+.student-toggle-copy p {
+  margin: 0.3rem 0 0;
+  color: var(--rs-muted);
+}
+
+.student-discount-pill {
+  flex: 0 0 auto;
+  color: var(--rs-white);
+  background: rgba(255,23,52,0.18);
+  border-radius: 999px;
+  padding: 0.5rem 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 24px rgba(224,0,22,0.16);
+}
+
+.student-verify-row {
+  display: none;
+  margin-top: 1rem;
+}
+
+.order-student-benefit.is-active .student-verify-row {
+  display: block;
+}
+
+.form-check-input:checked {
+  background-color: var(--rs-red-500);
+  border-color: var(--rs-red-500);
+}
+
+@media (max-width: 1320px) {
+  .collab-brand-copy span {
+    display: none;
+  }
+
+  .collab-nav-chip {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  .collab-brand-copy strong {
+    font-size: 0.92rem;
+  }
+
+  .collab-logo {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .collab-brand-logos {
+    gap: 0.3rem;
+  }
+
+  .collab-logo[src$="rockstar-logo.png"] {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.12rem;
+  }
+
+  .collab-logo[src$="smk-logo.png"] {
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0.1rem;
+  }
+
+  .collab-logo[src$="osis-pmk-logo.png"] {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.1rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .collab-brand-copy {
+    display: none;
+  }
+
+  .collab-brand-logos {
+    padding: 0.25rem 0.35rem;
+  }
+
+  .collab-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collab-separator {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .collab-logos-showcase {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 575px) {
+  .collab-logo {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .collab-logo[src$="rockstar-logo.png"] {
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0.08rem;
+  }
+
+  .collab-logo[src$="smk-logo.png"] {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.06rem;
+  }
+
+  .collab-logo[src$="osis-pmk-logo.png"] {
+    width: 1.85rem;
+    height: 1.85rem;
+    padding: 0.06rem;
+  }
+
+  .collab-x {
+    font-size: 0.55rem;
+  }
+
+  .collab-logo-card {
+    width: 100%;
+  }
+
+  .student-toggle-row {
+    display: grid;
+  }
+}

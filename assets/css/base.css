@@ -1,0 +1,73 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(224,0,22,0.13), transparent 26rem),
+    radial-gradient(circle at 92% 20%, rgba(255,23,52,0.09), transparent 24rem),
+    linear-gradient(180deg, var(--rs-void), #060608 46%, var(--rs-black));
+  color: var(--rs-soft);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.38;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E");
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; }
+::selection { background: var(--rs-red-500); color: var(--rs-white); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--rs-black); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--rs-red-500), var(--rs-red-900)); border-radius: 99px; }
+code {
+  color: var(--rs-red-300);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--rs-line);
+  border-radius: 0.4rem;
+  padding: 0.08rem 0.35rem;
+}
+.display-title,
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  line-height: 0.92;
+}
+.section-title { font-size: clamp(2.6rem, 7vw, 5.75rem); }
+.section-title span,
+.display-title span { color: var(--rs-red-400); text-shadow: 0 0 38px rgba(255,23,52,0.38); }
+.section-lead {
+  color: var(--rs-muted);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  max-width: 42rem;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--rs-red-300);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.eyebrow span {
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rs-red-400));
+  box-shadow: 0 0 14px var(--rs-red-400);
+}

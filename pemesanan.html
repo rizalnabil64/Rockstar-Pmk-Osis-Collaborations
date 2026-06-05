@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rockstar Games x PMK x OSIS PMK checkout with PMK Student Benefit discount, QR payment, and dynamic order summary." />
+  <title>Pemesanan — Rockstar × PMK Student Benefit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/pages/order.css" />
+  <link rel="stylesheet" href="assets/css/collaboration.css" />
+  <style>
+    .payment-method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+.payment-option {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 5rem;
+  padding: 0.9rem;
+  border: 1px solid var(--rs-line);
+  border-radius: var(--radius-md);
+  background: rgba(0,0,0,0.26);
+  cursor: pointer;
+  transition: transform var(--t-base), border-color var(--t-base), background var(--t-base), box-shadow var(--t-base);
+}
+.payment-option:hover,
+.payment-option.is-active {
+  transform: translateY(-0.15rem);
+  border-color: rgba(255,23,52,0.45);
+  background: rgba(224,0,22,0.12);
+  box-shadow: 0 0 28px rgba(224,0,22,0.12);
+}
+.payment-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.payment-option span {
+  width: 2.55rem;
+  height: 2.55rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--rs-red-300);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--rs-line);
+  font-size: 1.15rem;
+}
+.payment-option strong {
+  display: block;
+  color: var(--rs-white);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+.payment-option small {
+  display: block;
+  color: var(--rs-muted);
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+}
+
+  </style>
+</head>
+<body data-page="order">
+  <div id="page-loader" class="page-loader" data-loader-text="Preparing Secure Checkout">
+    <img src="assets/img/icons/rockstar-logo.png" alt="Logo Rockstar" width="200px">
+    <img src="assets/img/icons/osis-pmk-logo.png" alt="Logo OSIS PMK" width="150px">
+    <img src="assets/img/icons/smk-logo.png" alt="Logo SMK PMK" width="150px">
+    <div class="loader-track"><span></span></div>
+    <p>Preparing Secure Checkout</p>
+  </div>
+
+  <div data-component="navbar"></div>
+
+  <main class="order-page">
+    <section class="order-hero section-padding-sm text-center">
+      <div class="container px-4 reveal">
+        <h1 class="display-title order-title">Rockstar <span>PMK</span> Checkout</h1>
+      </div>
+    </section>
+
+    <section class="container container-order px-4 pb-5">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-7 reveal">
+          <form class="checkout-card glass-panel needs-validation" id="orderForm" novalidate>
+            <div class="form-heading">
+              <i class="bi bi-person-badge"></i>
+              <div>
+                <h2>Informasi Pemesanan</h2>
+                <p>Isi data client dan status siswa PMK supaya admin program dapat memproses order kolaborasi dengan jelas.</p>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6 form-floating-rs">
+                <input type="text" id="customerName" class="form-control rs-control" placeholder="Nama Lengkap" required />
+                <label for="customerName">Nama Lengkap</label>
+                <div class="invalid-feedback">Nama wajib diisi.</div>
+              </div>
+              <div class="col-md-6 form-floating-rs">
+                <input type="email" id="customerEmail" class="form-control rs-control" placeholder="Email" required />
+                <label for="customerEmail">Email</label>
+                <div class="invalid-feedback">Masukkan email yang valid.</div>
+              </div>
+              <div class="col-md-6 form-floating-rs">
+                <input type="tel" id="customerPhone" class="form-control rs-control" placeholder="Nomor WhatsApp" pattern="^[0-9+ ]{10,16}$" required />
+                <label for="customerPhone">Nomor WhatsApp</label>
+                <div class="invalid-feedback">Masukkan nomor WhatsApp yang valid.</div>
+              </div>
+              <div class="col-md-6 form-floating-rs">
+                <input type="text" id="customerCity" class="form-control rs-control" placeholder="Kota / Kabupaten" required />
+                <label for="customerCity">Kota / Kabupaten</label>
+                <div class="invalid-feedback">Kota wajib diisi.</div>
+              </div>
+
+              <div class="col-12 form-floating-rs">
+                <textarea id="shippingAddress" class="form-control rs-control rs-textarea" placeholder="Alamat lengkap" required></textarea>
+                <label for="shippingAddress">Alamat Lengkap</label>
+                <div class="invalid-feedback">Alamat lengkap wajib diisi.</div>
+              </div>
+
+              <div class="col-md-8 form-floating-rs">
+                <select id="gameSelect" class="form-select rs-control" required>
+                  <option value="" selected>Pilih game</option>
+                </select>
+                <label for="gameSelect">Game yang Dipesan</label>
+                <div class="invalid-feedback">Pilih salah satu game.</div>
+              </div>
+              <div class="col-md-4 form-floating-rs">
+                <select id="editionSelect" class="form-select rs-control">
+                  <option value="Standard Edition">Standard Edition</option>
+                  <option value="Special Edition">Special Edition</option>
+                  <option value="Ultimate Edition">Ultimate Edition</option>
+                  <option value="PMK Student Edition">PMK Student Edition</option>
+                  <option value="Limited Educational Collaboration">Limited Educational Collaboration</option>
+                </select>
+                <label for="editionSelect">Edisi</label>
+              </div>
+              <div class="col-md-6 form-floating-rs">
+                <select id="platformSelect" class="form-select rs-control">
+                  <option value="PC">PC</option>
+                  <option value="PlayStation 5">PlayStation 5</option>
+                  <option value="PlayStation 4">PlayStation 4</option>
+                  <option value="Xbox Series X|S">Xbox Series X|S</option>
+                  <option value="Nintendo Switch">Nintendo Switch</option>
+                </select>
+                <label for="platformSelect">Platform</label>
+              </div>
+              <div class="col-md-6">
+                <label class="field-label">Jumlah</label>
+                <div class="quantity-control" aria-label="Quantity control">
+                  <button type="button" id="qtyMinus" aria-label="Decrease quantity">−</button>
+                  <input type="number" id="quantityInput" value="1" min="1" max="10" readonly />
+                  <button type="button" id="qtyPlus" aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="order-student-benefit" id="studentBenefitBox">
+                  <div class="student-toggle-row">
+                    <div class="student-toggle-copy">
+                      <span class="premium-badge"><i class="bi bi-patch-check-fill"></i> Official Student Program</span>
+                      <h3 class="mt-3">PMK Student Benefit</h3>
+                      <p>Aktifkan benefit siswa PMK untuk mendapatkan potongan hingga 15% dan badge khusus pada ringkasan order.</p>
+                    </div>
+                    <span class="student-discount-pill">Diskon 15%</span>
+                  </div>
+                  <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" value="yes" id="pmkStudentToggle" />
+                    <label class="form-check-label text-white fw-bold" for="pmkStudentToggle">Saya siswa SMK Pratama Mulya Karawang</label>
+                  </div>
+                  <div class="student-verify-row">
+                    <div class="form-floating-rs">
+                      <input type="text" id="pmkStudentId" class="form-control rs-control" placeholder="NIS / Kode Siswa PMK" pattern="^[A-Za-z0-9- ]{4,24}$" />
+                      <label for="pmkStudentId">NIS / Kode Siswa PMK</label>
+                      <div class="invalid-feedback">Isi NIS atau kode siswa PMK 4-24 karakter.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label">Metode Pembayaran</label>
+                <div class="payment-method-grid" id="paymentMethodGroup">
+                  <label class="payment-option is-active">
+                    <input type="radio" name="paymentMethod" value="QRIS" checked />
+                    <span><i class="bi bi-qr-code"></i></span>
+                    <div><strong>QRIS</strong><small>Scan QR code asli</small></div>
+                  </label>
+                  <label class="payment-option">
+                    <input type="radio" name="paymentMethod" value="Transfer Bank" />
+                    <span><i class="bi bi-bank"></i></span>
+                    <div><strong>Transfer Bank</strong><small>Isi bank & nomor rekening</small></div>
+                  </label>
+                  <label class="payment-option">
+                    <input type="radio" name="paymentMethod" value="E-Wallet" />
+                    <span><i class="bi bi-wallet2"></i></span>
+                    <div><strong>E-Wallet</strong><small>DANA, OVO, GoPay, dll</small></div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="qris-box is-active" id="qrisBox">
+                  <div class="qris-info">
+                    <span class="qris-label">QR Code Pembayaran</span>
+                    <h3>Scan QR order</h3>
+                    <p>QR ini dibuat dengan generator QR asli, jadi bisa discan dari HP. Untuk pembayaran QRIS merchant resmi, ganti payload QRIS di file JavaScript dengan data QRIS dari bank/payment gateway.</p>
+                    <div class="qris-meta">
+                      <span>Kode Order</span>
+                      <strong id="qrisOrderCode">RS-0000</strong>
+                    </div>
+                    <div class="qris-actions">
+                      <button type="button" id="refreshQris"><i class="bi bi-arrow-clockwise"></i> Buat QR Baru</button>
+                      <button type="button" id="copyOrderCode"><i class="bi bi-copy"></i> Salin Kode</button>
+                    </div>
+                  </div>
+                  <div class="qris-code-wrap">
+                    <div class="qris-code" id="qrisCode" aria-label="QR code pembayaran yang bisa discan">
+                      <canvas id="qrisCanvas" width="184" height="184"></canvas>
+                    </div>
+                    <span id="qrisValidUntil">Aktif 15 menit</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 payment-detail-panel" id="bankDetailPanel" aria-live="polite">
+                <div class="payment-detail-card">
+                  <div class="payment-detail-heading">
+                    <i class="bi bi-bank"></i>
+                    <div>
+                      <h3>Detail Transfer Bank</h3>
+                      <p>Client wajib isi bank dan nomor rekening pengirim agar admin mudah cek pembayaran.</p>
+                    </div>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-4 form-floating-rs">
+                      <select id="bankName" class="form-select rs-control">
+                        <option value="">Pilih bank</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BNI">BNI</option>
+                        <option value="BRI">BRI</option>
+                        <option value="Mandiri">Mandiri</option>
+                        <option value="CIMB Niaga">CIMB Niaga</option>
+                        <option value="BSI">BSI</option>
+                        <option value="Lainnya">Lainnya</option>
+                      </select>
+                      <label for="bankName">Nama Bank</label>
+                      <div class="invalid-feedback">Pilih bank pengirim.</div>
+                    </div>
+                    <div class="col-md-4 form-floating-rs">
+                      <input type="text" id="bankAccountNumber" class="form-control rs-control" placeholder="No Rekening" inputmode="numeric" pattern="^[0-9]{6,20}$" />
+                      <label for="bankAccountNumber">No Rekening</label>
+                      <div class="invalid-feedback">Isi nomor rekening 6-20 digit.</div>
+                    </div>
+                    <div class="col-md-4 form-floating-rs">
+                      <input type="text" id="bankAccountHolder" class="form-control rs-control" placeholder="Nama Pemilik" />
+                      <label for="bankAccountHolder">Nama Pemilik Rekening</label>
+                      <div class="invalid-feedback">Nama pemilik rekening wajib diisi.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 payment-detail-panel" id="ewalletDetailPanel" aria-live="polite">
+                <div class="payment-detail-card">
+                  <div class="payment-detail-heading">
+                    <i class="bi bi-phone"></i>
+                    <div>
+                      <h3>Detail E-Wallet</h3>
+                      <p>Isi jenis e-wallet dan nomor yang dipakai untuk pembayaran.</p>
+                    </div>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-4 form-floating-rs">
+                      <select id="ewalletProvider" class="form-select rs-control">
+                        <option value="">Pilih e-wallet</option>
+                        <option value="DANA">DANA</option>
+                        <option value="OVO">OVO</option>
+                        <option value="GoPay">GoPay</option>
+                        <option value="ShopeePay">ShopeePay</option>
+                        <option value="LinkAja">LinkAja</option>
+                        <option value="Lainnya">Lainnya</option>
+                      </select>
+                      <label for="ewalletProvider">E-Wallet</label>
+                      <div class="invalid-feedback">Pilih e-wallet.</div>
+                    </div>
+                    <div class="col-md-4 form-floating-rs">
+                      <input type="tel" id="ewalletNumber" class="form-control rs-control" placeholder="No E-Wallet" inputmode="tel" pattern="^[0-9+ ]{10,16}$" />
+                      <label for="ewalletNumber">No E-Wallet</label>
+                      <div class="invalid-feedback">Isi nomor e-wallet yang valid.</div>
+                    </div>
+                    <div class="col-md-4 form-floating-rs">
+                      <input type="text" id="ewalletOwner" class="form-control rs-control" placeholder="Nama Pemilik" />
+                      <label for="ewalletOwner">Nama Akun E-Wallet</label>
+                      <div class="invalid-feedback">Nama akun e-wallet wajib diisi.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 form-floating-rs">
+                <textarea id="notesInput" class="form-control rs-control rs-textarea" placeholder="Catatan tambahan"></textarea>
+                <label for="notesInput">Catatan Tambahan</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-rs-primary btn-checkout w-100 mt-4 magnetic" id="submitOrder">
+              <i class="bi bi-shield-lock-fill"></i>
+              Confirm Secure Order
+            </button>
+
+            <p class="secure-note"><i class="bi bi-lock-fill"></i>Data order diringkas otomatis supaya client mudah mengecek sebelum checkout.</p>
+          </form>
+        </div>
+
+        <div class="col-lg-5 reveal reveal-delay-2">
+          <aside class="summary-panel glass-panel" id="orderSummary">
+            <div class="summary-cover">
+              <img id="summaryImage" src="assets/img/rockstarlist.jpg" alt="Selected game preview" />
+              <div class="summary-cover-overlay"></div>
+              <span id="summaryBadge">Waiting Selection</span>
+            </div>
+            <div class="summary-body">
+              <div class="d-flex justify-content-between gap-3 align-items-start mb-3">
+                <div>
+                  <h2 id="summaryTitle">Belum dipilih</h2>
+                  <p id="summaryMeta">Pilih game terlebih dahulu</p>
+                </div>
+                <div class="summary-rating" id="summaryRating">—</div>
+              </div>
+
+              <div class="summary-lines">
+                <div><span>Client</span><strong id="lineCustomer">—</strong></div>
+                <div><span>Kontak</span><strong id="lineContact">—</strong></div>
+                <div><span>Alamat</span><strong id="lineAddress">—</strong></div>
+                <div><span>Game</span><strong id="lineGame">—</strong></div>
+                <div><span>Edisi</span><strong id="lineEdition">Standard Edition</strong></div>
+                <div><span>Platform</span><strong id="linePlatform">PC</strong></div>
+                <div><span>Jumlah</span><strong id="lineQuantity">1</strong></div>
+                <div><span>Student Benefit</span><strong id="lineStudentBenefit">Tidak aktif</strong></div>
+                <div><span>Harga Game</span><strong id="lineBasePrice">Rp0</strong></div>
+                <div><span>Upgrade Edisi</span><strong id="lineEditionPrice">Rp0</strong></div>
+                <div><span>Diskon PMK</span><strong id="lineStudentDiscount">Rp0</strong></div>
+                <div><span>Pembayaran</span><strong id="linePayment">QRIS</strong></div>
+                <div><span>Detail Bayar</span><strong id="linePaymentDetail">QR code siap discan</strong></div>
+                <div class="summary-total"><span>Total</span><strong id="lineTotal">Rp0</strong></div>
+              </div>
+
+              <div class="platform-shortcuts mt-4" id="platformShortcuts">
+                <button type="button" data-platform="PC" class="active">PC</button>
+                <button type="button" data-platform="PlayStation 5">PS5</button>
+                <button type="button" data-platform="PlayStation 4">PS4</button>
+                <button type="button" data-platform="Xbox Series X|S">Xbox</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-component="footer"></div>
+
+  <div class="rs-toast" id="orderToast" role="status" aria-live="polite">
+    <i class="bi bi-check2-circle"></i>
+    <div><strong>Pesanan berhasil dibuat</strong><span id="toastMessage">Order kamu sedang diproses.</span></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="assets/data/games.js" defer></script>
+  <script src="assets/js/navbar.js" defer></script>
+  <script src="assets/js/loader.js" defer></script>
+  <script src="assets/js/scroll-reveal.js" defer></script>
+  <script src="assets/js/modal.js" defer></script>
+  <script src="assets/js/qrcode-local.js" defer></script>
+  <script src="assets/js/order-form.js" defer></script>
+  <script src="assets/js/collaboration.js" defer></script>
+  <script src="assets/js/animations.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
